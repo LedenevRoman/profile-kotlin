@@ -12,7 +12,6 @@ spring:
 
   liquibase:
     change-log: classpath:db/changelog/master.xml
-    drop-first: true
 
   servlet:
     multipart:

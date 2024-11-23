@@ -17,9 +17,19 @@
 
 **____________________________________**
 
+## Tests
+**Integration tests are written with a separate test database using**
+
+* [H2](https://www.h2database.com/html/main.html)
+* [Junit 5](https://junit.org/junit5/)
+* [Mockito](https://site.mockito.org/)
+
+**____________________________________**
+
 ## How to start?
 
-**to run locally you can use the run.sh script** 
+**to run locally start [Docker Desktop](https://www.docker.com/products/docker-desktop) 
+and use the `run.sh` and `stop.sh` scripts** 
 
 **or use the command from the directory with the docker-compose.yml file.**
 
@@ -32,18 +42,16 @@ docker-compose up --build -d
 * 8080 - profile REST API
 * 5432 - postgresql relational database
 
+***
+**to run in an IDE you need to create a database in postgresql and fill in the following environment variables:**
+
+* `SPRING_DATASOURCE_URL`
+* `SPRING_DATASOURCE_USER`
+* `SPRING_DATASOURCE_PASSWORD`
+
 **____________________________________**
 
 ## How to use?
 
-**[Swagger API Documentation](http://localhost:8080/swagger-ui/index.html) follow this link and you will see a list of 
+**[Swagger API Documentation](http://localhost:8080/swagger-ui/index.html) follow this link, and you will see a list of 
 available REST endpoints and a description of the Data Transfer Object classes**
-
-## TESTS
-**Integration tests are written with a separate test database using**
-
-* [H2](https://www.h2database.com/html/main.html)
-* [Junit 5](https://junit.org/junit5/)
-* [Mockito](https://site.mockito.org/)
-
-**____________________________________**

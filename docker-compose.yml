@@ -1,0 +1,28 @@
+services:
+  profile-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://profile-db:5432/profile
+      SPRING_DATASOURCE_USER: profileuser
+      SPRING_DATASOURCE_PASSWORD: password
+    depends_on:
+      - profile-db
+
+  profile-db:
+    image: postgres:17.2-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: profile
+      POSTGRES_USER: profileuser
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

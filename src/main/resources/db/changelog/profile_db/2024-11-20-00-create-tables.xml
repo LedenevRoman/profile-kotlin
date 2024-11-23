@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="Roman Ledenev" id="create profiles table">
+        <preConditions onFail="CONTINUE" onFailMessage="Table profiles already exists">
+            <not>
+                <tableExists tableName="profiles"/>
+            </not>
+        </preConditions>
+        <createTable tableName="profiles">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="job_title" type="varchar(100)"/>
+            <column name="phone" type="varchar(15)"/>
+            <column name="email" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="varchar(200)"/>
+            <column name="avatar_image_name" type="varchar(100)"/>
+            <column name="is_public" type="bool" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Roman Ledenev" id="create interests table">
+        <preConditions onFail="CONTINUE" onFailMessage="Table interests already exists">
+            <not>
+                <tableExists tableName="interests"/>
+            </not>
+        </preConditions>
+        <createTable tableName="interests">
+            <column name="profile_id" type="uuid">
+                <constraints foreignKeyName="fk_interest_profile"
+                             references="profiles(id)"
+                             nullable="false"
+                             deleteCascade="true"/>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interest_order" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Roman Ledenev" id="create links table">
+        <preConditions onFail="CONTINUE" onFailMessage="Table links already exists">
+            <not>
+                <tableExists tableName="links"/>
+            </not>
+        </preConditions>
+        <createTable tableName="links">
+            <column name="profile_id" type="uuid">
+                <constraints foreignKeyName="fk_links_profile"
+                             references="profiles(id)"
+                             nullable="false"
+                             deleteCascade="true"/>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="link_order" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

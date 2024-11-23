@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USER}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    defer-datasource-initialization: false
+    open-in-view: false
+    show-sql: true
+
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
+    drop-first: true
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
